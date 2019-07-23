@@ -66,27 +66,27 @@ namespace Magitek.Logic.Dancer
                 switch (step)
                 {
                     case ActionResourceManager.Dancer.DanceStep.Finish:
-                        danceStep = Spells.DoubleStandardFinish;
+                        danceStep = Spells.StandardStep;
                         break;
 
                     case ActionResourceManager.Dancer.DanceStep.Emboite:
-                        danceStep = Spells.Emboite;
+                        danceStep = Spells.Cascade;
                         break;
 
                     case ActionResourceManager.Dancer.DanceStep.Entrechat:
-                        danceStep = Spells.Entrechat;
+                        danceStep = Spells.Fountain;
                         break;
 
                     case ActionResourceManager.Dancer.DanceStep.Jete:
-                        danceStep = Spells.Jete;
+                        danceStep = Spells.ReverseCascade;
                         break;
 
                     case ActionResourceManager.Dancer.DanceStep.Pirouette:
-                        danceStep = Spells.Pirouette;
+                        danceStep = Spells.Fountainfall;
                         break;
 
                     default:
-                        danceStep = Spells.DoubleStandardFinish;
+                        danceStep = Spells.StandardStep;
                         break;
                 }
 
@@ -151,27 +151,27 @@ namespace Magitek.Logic.Dancer
                 switch (step)
                 {
                     case ActionResourceManager.Dancer.DanceStep.Finish:
-                        danceStep = Spells.QuadrupleTechnicalFinish;
+                        danceStep = Spells.TechnicalStep;
                         break;
 
                     case ActionResourceManager.Dancer.DanceStep.Emboite:
-                        danceStep = Spells.Emboite;
+                        danceStep = Spells.Cascade;
                         break;
 
                     case ActionResourceManager.Dancer.DanceStep.Entrechat:
-                        danceStep = Spells.Entrechat;
+                        danceStep = Spells.Fountain;
                         break;
 
                     case ActionResourceManager.Dancer.DanceStep.Jete:
-                        danceStep = Spells.Jete;
+                        danceStep = Spells.ReverseCascade;
                         break;
 
                     case ActionResourceManager.Dancer.DanceStep.Pirouette:
-                        danceStep = Spells.Pirouette;
+                        danceStep = Spells.Fountainfall;
                         break;
 
                     default:
-                        danceStep = Spells.QuadrupleTechnicalFinish;
+                        danceStep = Spells.TechnicalStep;
                         break;
                 }
 
