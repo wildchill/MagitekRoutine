@@ -120,6 +120,9 @@ namespace Magitek.Logic.Samurai
             if (Core.Me.CurrentTarget.Distance(Core.Me) + Core.Me.CurrentTarget.CombatReach > 10)
                 return false;
 
+            if (Utilities.Routines.Samurai.LastIaijutsuSpell != Utilities.Routines.Samurai.IaijutsuSpell.TenkaGoken)
+                return false;
+
             //Don't go further down the tree, wait for Tsubame if we're over level 76
             return await Spells.KaeshiGoken.Cast(Core.Me.CurrentTarget) || (Spells.KaeshiGoken.Cooldown.TotalMilliseconds <= 2000 && Casting.LastSpell == Spells.TenkaGoken);
         }
@@ -160,7 +163,13 @@ namespace Magitek.Logic.Samurai
             if (SamuraiSettings.Instance.OnlyUseTenkaGokenWithKaiten && !Core.Me.HasAura(Auras.Kaiten))
                 return false;
 
-            return await Spells.TenkaGoken.Cast(Core.Me.CurrentTarget) || Core.Me.HasAura(Auras.Kaiten);
+            var casted = await Spells.TenkaGoken.Cast(Core.Me.CurrentTarget);
+            var hasKaiten = Core.Me.HasAura(Auras.Kaiten);
+
+            if (casted)
+                Utilities.Routines.Samurai.LastIaijutsuSpell = Utilities.Routines.Samurai.IaijutsuSpell.TenkaGoken;
+
+            return casted || hasKaiten;
         }
 
         public static async Task<bool> HissatsuKyuten()

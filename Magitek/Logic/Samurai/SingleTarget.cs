@@ -116,6 +116,9 @@ namespace Magitek.Logic.Samurai
             if (Casting.LastSpell != Spells.MidareSetsugekka || (DateTime.Now - Casting.LastSpellTimeFinished) > TimeSpan.FromSeconds(14))
                 return false;
 
+            if (Utilities.Routines.Samurai.LastIaijutsuSpell != Utilities.Routines.Samurai.IaijutsuSpell.MidareSetsugekka)
+                return false;
+
             //Don't go further down the tree, wait for Tsubame if we're over level 76
             return await Spells.KaeshiSetsugekka.Cast(Core.Me.CurrentTarget) || (Spells.KaeshiSetsugekka.Cooldown.TotalMilliseconds <= 3000 && Casting.LastSpell == Spells.MidareSetsugekka);
         }
@@ -174,6 +177,9 @@ namespace Magitek.Logic.Samurai
             var casted = await Spells.MidareSetsugekka.Cast(Core.Me.CurrentTarget);
             var hasKaiten = Core.Me.HasAura(Auras.Kaiten);
 
+            if (casted)
+                Utilities.Routines.Samurai.LastIaijutsuSpell = Utilities.Routines.Samurai.IaijutsuSpell.MidareSetsugekka;
+
             //If we get interrupted casting Midare and still have Kaiten up, wait until we either succeed casting it, or we lose Kaiten
             return casted || hasKaiten;
         
@@ -213,8 +219,14 @@ namespace Magitek.Logic.Samurai
 
             if (BaseSettings.Instance.DebugPlayerCasting) Logger.WriteInfo($"Already have Kaiten buff or too low level to cast, casting {Spells.Higanbana.LocalizedName} alone...");
 
+            var casted = await Spells.Higanbana.Cast(Core.Me.CurrentTarget);
+            var hasKaiten = Core.Me.HasAura(Auras.Kaiten);
+
+            if (casted)
+                Utilities.Routines.Samurai.LastIaijutsuSpell = Utilities.Routines.Samurai.IaijutsuSpell.Higanbana;
+
             //If we get interrupted casting Higanbana and still have Kaiten up, wait until we either succeed casting it, or we lose Kaiten
-            return await Spells.Higanbana.Cast(Core.Me.CurrentTarget) || Core.Me.HasAura(Auras.Kaiten);
+            return casted || hasKaiten;
         }
 
         public static async Task<bool> KaeshiHiganbana()

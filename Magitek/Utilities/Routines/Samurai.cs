@@ -31,6 +31,15 @@ namespace Magitek.Utilities.Routines
 
         public static Queue<SpellData> CastDuringMeikyo = new Queue<SpellData>();
 
+        public enum IaijutsuSpell
+        {
+            Higanbana,
+            TenkaGoken,
+            MidareSetsugekka
+        }
+
+        public static IaijutsuSpell LastIaijutsuSpell;
+
         public static int EnemiesInCone;
         public static int AoeEnemies5Yards;
         public static int AoeEnemies8Yards;
@@ -43,6 +52,8 @@ namespace Magitek.Utilities.Routines
             EnemiesInCone = Core.Me.EnemiesInCone(10);
             AoeEnemies5Yards = Combat.Enemies.Where(x => x.WithinSpellRange(5)).Count();
             AoeEnemies8Yards = Combat.Enemies.Where(x => x.WithinSpellRange(8)).Count();
+
+            Logger.Write($"{ActionManager.LastSpell.Name}");
         }
 
         public static bool QueueKaitenFollowUp(SpellData spell, SpellData tsubame = null)
