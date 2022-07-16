@@ -53,7 +53,7 @@ namespace Magitek.Models.Account
         [Setting]
         [DefaultValue(false)]
         public bool ResetOpeners { get; set; }
-        
+
         [Setting]
         [DefaultValue(false)]
         public bool UseFightLogic { get; set; }
@@ -96,7 +96,7 @@ namespace Magitek.Models.Account
         [Setting]
         [DefaultValue(false)]
         public bool DebugHealingLists { get; set; }
-        
+
         [Setting]
         [DefaultValue(false)]
         public bool DebugHealingListsPrintToLog { get; set; }
@@ -128,11 +128,11 @@ namespace Magitek.Models.Account
         [Setting]
         [DefaultValue(false)]
         public bool DebugCastingCallerMemberNameIncludePath { get; set; }
-        
+
         [Setting]
         [DefaultValue(false)]
         public bool DebugFightLogic { get; set; }
-        
+
         [Setting]
         [DefaultValue(false)]
         public bool DebugFightLogicFound { get; set; }
@@ -216,6 +216,10 @@ namespace Magitek.Models.Account
         [Setting]
         [DefaultValue(false)]
         public bool UseAutoFaceChecks { get; set; }
+
+        [Setting]
+        [DefaultValue(true)]
+        public bool EnableSquadronSupport { get; set; }
 
         [Setting]
         [DefaultValue(true)]

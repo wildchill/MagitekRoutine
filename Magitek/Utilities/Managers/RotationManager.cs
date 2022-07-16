@@ -1,9 +1,12 @@
 ﻿using ff14bot;
 using ff14bot.Enums;
+using ff14bot.Helpers;
+using ff14bot.Managers;
 using Magitek.Models.Account;
 using PropertyChanged;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Magitek.Utilities.Managers
 {
@@ -218,6 +221,17 @@ namespace Magitek.Utilities.Managers
         {
             if (!BaseSettings.Instance.ActiveCombatRoutine)
                 return false;
+
+            if (BaseSettings.Instance.EnableSquadronSupport)
+            {
+                var canCastEngage = ActionManager.CanCast(1, Core.Me.CurrentTarget);
+                var hasTrustParty = PartyManager.AllMembers.Any(pm => pm is TrustPartyMember);
+                if (DutyManager.InInstance && hasTrustParty && canCastEngage)
+                {
+                    Logging.Write(Colors.Bisque, "Using Engage");
+                    ActionManager.DoAction(ActionType.Squadron, 1, GameObjectManager.Target);
+                }
+            }
 
             switch (RotationManager.CurrentRotation)
             {
